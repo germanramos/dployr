@@ -173,6 +173,16 @@ module Dployr
       config
     end
 
+    def merge_parents(child)
+      parents = get_by_key child, :parents
+      parents = [ parents ] if parents.is_a? String
+      parents.each do |parent|
+        parent = get_instance parent
+        child = deep_merge parent.get_values, child unless parent.nil?
+      end if parents.is_a? Array
+      child
+    end
+
     def replace_keywords(keyword, value, hash)
       traverse_map hash do |str|
         str.gsub "${#{keyword.to_s}}", value.to_s
@@ -201,14 +211,5 @@ module Dployr
       child
     end
 
-    def merge_parents(child)
-      parents = get_by_key child, :parents
-      parents = [ parents ] if parents.is_a? String
-      parents.each do |parent|
-        parent = get_instance parent
-        child = deep_merge parent.get_values, child unless parent.nil?
-      end if parents.is_a? Array
-      child
-    end
   end
 end

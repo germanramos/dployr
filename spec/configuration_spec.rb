@@ -30,7 +30,8 @@ describe Dployr::Configuration do
             attributes: {
               network_id: "be457fca",
               instance_type: "m1.small",
-              "type-%{name}" => "small"
+              "type-%{name}" => "small",
+              template: "${name}"
             },
             scripts: [
               {
@@ -269,7 +270,7 @@ describe Dployr::Configuration do
             end
 
             it "should have a valid number of attributes" do
-              zeus[:providers][:aws][:attributes].should have(6).items
+              zeus[:providers][:aws][:attributes].should have(7).items
             end
 
             it "should have a valid instance_type" do
@@ -285,6 +286,10 @@ describe Dployr::Configuration do
             end
 
             describe "templating" do
+              it "should have a template context name" do
+                zeus[:providers][:aws][:attributes][:template].should eql "zeus"
+              end
+
               it "should have a version attribute" do
                 zeus[:providers][:aws][:attributes][:version].should eql "0.1.0"
               end
