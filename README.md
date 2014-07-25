@@ -2,8 +2,6 @@
 
 > **Alpha project, use it by your own risk**
 
-## About
-
 **Dployr** is a Ruby utility that **simplifies cloud management
 and deployment** across different providers
 
