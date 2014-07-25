@@ -18,6 +18,10 @@ module Dployr
         @attrs = parse_attributes @options[:attributes]
         @options[:public_ip] = false if !options[:public_ip]
         @provider = options[:provider].upcase if options[:provider]
+        @region = options[:region]
+        raise "Missing provider argument. Use -p <provider>" unless @provider
+        raise "Missing region argument. Use -r <region>" unless @region
+
         create
         get_config
       end

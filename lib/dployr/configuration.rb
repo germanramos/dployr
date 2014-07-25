@@ -79,8 +79,7 @@ module Dployr
     private
 
     def render_config(name, instance, attributes)
-      config = merge_config instance, attributes
-      config = replace_name name, config
+      config = merge_config name, instance, attributes
       config = replace_variables config, attributes
       config
     end
@@ -145,10 +144,11 @@ module Dployr
       attrs
     end
 
-    def merge_config(instance, attributes = {})
+    def merge_config(name, instance, attributes = {})
       config = merge_defaults instance.get_values
       config[:attributes] =
         (get_by_key(config, :attributes) or {}).merge attributes if attributes
+      config = replace_name name, config
       merge_providers merge_parents config
     end
 

@@ -1,7 +1,7 @@
 ---
 default:
   attributes:
-    name: "%{name}"
+    name: "${name}"
     prefix: dev
     private_key_path: ~/pems/innotechdev.pem
     username: innotechdev
@@ -49,43 +49,35 @@ default:
       args: "%{name}"
       path: ./scripts/updatedns.sh
 
+web-server:
+  attributes:
+    prefix: zeus-dev
+    template: "${name}"
+    domain: "%{template}.server.net"
+  authentication:
+    private_key_path: ~/.ssh/id_rsa
+    public_key_path: ~/.ssh/id_rsa.pub
+    username: ubuntu
+  scripts:
+    -
+      args:
+        - "%{name}"
+        - "%{domain}"
+      path: ./scripts/configure.sh
+    -
+      args:
+        - "${provider}-${region}"
+        - "%{domain}"
+      path: ./scripts/hydraProbe.sh
+  providers:
+    aws:
+      attributes:
+        instance_type: m1.medium
 
-custom:
-  name: 1
-  web-server:
-    attributes:
-      prefix: zeus-dev
-    authentication:
-      private_key_path: ~/.ssh/id_rsa
-      public_key_path: ~/.ssh/id_rsa.pub
-      username: ubuntu
-    providers:
-      aws:
-        regions:
-        attributes:
-          instance_type: m1.medium
-      gce:
-        attributes:
-          instance_type: m1.large
-    scripts:
-      -
-        args:
-          - "%{name}"
-          - "%{type}"
-          - "%{domain}"
-        path: ./scripts/configure.sh
-      -
-        args:
-          - "%{hydra}"
-        path: ./scripts/configureListener.sh
-      -
-        args:
-          - "%{$provider}-%{region}"
-          - "%{type}"
-        path: ./scripts/hydraProbe.sh
-
-#instances:
-#  zeus:
-#    include: ['web-server']
-#    attributes:
-#      name: zeus
+      regions:
+        eu-west-1a:
+          attributes:
+            stop: true
+    gce:
+      attributes:
+        instance_type: m1.large
