@@ -2,15 +2,6 @@
 
 > **Alpha project, use it by your own risk**
 
-<table>
-<tr>
-<td><b>Version</b></td><td>alpha</td>
-</tr>
-<tr>
-<td><b>Stage</b></td><td>WIP</td>
-</tr>
-</table>
-
 ## About
 
 **Dployr** is a Ruby utility that **simplifies cloud management
