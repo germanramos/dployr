@@ -1,6 +1,6 @@
 # dployr [![Build Status](https://secure.travis-ci.org/innotech/dployr.svg?branch=master)][travis] [![Dependency Status](https://gemnasium.com/innotech/dployr.svg)][gemnasium] [![Gem](https://badge.fury.io/rb/dployr.svg)][gem]
 
-> **Alpha project, use it by your own risk**
+> **Beta project, use it by your own risk**
 
 **Dployr** is a Ruby utility that **simplifies cloud management
 and deployment** across different providers
@@ -24,9 +24,9 @@ If you need to use it from another Ruby package,
 add it as dependency in your `Gemfile` or `.gemspec` file
 ```ruby
 # gemspec
-spec.add_dependency 'dployr', '~> 0.0.1'
+spec.add_dependency 'dployr', '~> 0.1.0'
 # Gemfile
-gem 'dployr', '>= 0.0.1'
+gem 'dployr', '>= 0.1.0'
 ```
 
 It requires Ruby `1.9.3+`
