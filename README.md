@@ -165,7 +165,7 @@ custom:
       regions:
       attributes:
         instance_type: m1.medium
-        public_ip: new # create a elastic IP
+        public_ip: new # create new elastic IP (AWS)
     gce:
       attributes:
         instance_type: m1.large
