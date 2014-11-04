@@ -6,7 +6,7 @@
 and deployment** across different providers
 
 You can setup all your project cloud infraestructure from a
-simple [configuration file](#configuration) and deploy it into multiple clouds easily
+simple [configuration file](#configuration) and deploy it into multiple public or private clouds easily
 
 Using Dployr you can take full control for the multiple infrastructure stage phases
 which covers the complete project deployment workflow,
