@@ -198,7 +198,7 @@ custom:
         local_path: ./scripts/configure.sh
     provision:
       - args:
-          - "%{$provider}-%{$region}"
+          - "${provider}-${region}"
           - "%{type}"
         local_path: ./scripts/provision.sh
     test:
