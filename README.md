@@ -170,23 +170,39 @@ custom:
       attributes:
         instance_type: m1.large
   scripts:
+    # SCP example (copy directory from local to remote server)
+    pre-provision:
+      - remote_path: "rm -rf /tmp/scripts/"
+      - source: "./scripts"
+        target: "/tmp/"
+    # multiple remove scripts execution via SSH
+    provision:
+      - remote_path: "sudo /tmp/scripts/provision.sh"
+        args: "%{name} --debug"
+      - remote_path: "sudo /tmp/scripts/update_dns.sh"
+        args: "%{name}"
+      - remote_path: "sudo /tmp/scripts/puppet.sh"
+        args: "%{puppetmaster} %{environment}"
+    # examples execution script from local machine
+    test:
+      - local_path: "./test/test.sh %{full_prefix} %{name} %{username} %{private_key_path}"
     pre-start:
       - args:
           - "%{name}"
           - "%{type}"
           - "%{domain}"
-        path: ./scripts/pre-start.sh
+        local_path: ./scripts/pre-start.sh
     start:
       - args:
           - "%{hydra}"
-        path: ./scripts/configure.sh
+        local_path: ./scripts/configure.sh
     provision:
       - args:
           - "%{$provider}-%{region}"
           - "%{type}"
-        path: ./scripts/provision.sh
+        local_path: ./scripts/provision.sh
     test:
-      - path: ./scripts/serverspec.sh
+      - local_path: ./scripts/serverspec.sh
 
 network-template:
   attributes:
