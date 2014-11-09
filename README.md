@@ -165,7 +165,7 @@ custom:
       regions:
       attributes:
         instance_type: m1.medium
-        public_ip: new # create new elastic IP (AWS)
+        public_ip: new # assign new elastic IP (AWS) to the instance
     gce:
       attributes:
         instance_type: m1.large
@@ -175,7 +175,7 @@ custom:
       - remote_path: "rm -rf /tmp/scripts/"
       - source: "./scripts"
         target: "/tmp/"
-    # multiple remove scripts execution via SSH
+    # multiple remote scripts execution with custom flags via SSH
     provision:
       - remote_path: "sudo /tmp/scripts/provision.sh"
         args: "%{name} --debug"
@@ -183,7 +183,7 @@ custom:
         args: "%{name}"
       - remote_path: "sudo /tmp/scripts/puppet.sh"
         args: "%{puppetmaster} %{environment}"
-    # examples execution script from local machine
+    # multiple examples executing scripts from local machine
     test:
       - local_path: "./test/test.sh %{full_prefix} %{name} %{username} %{private_key_path}"
     pre-start:
