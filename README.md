@@ -1,7 +1,5 @@
 # dployr [![Build Status](https://secure.travis-ci.org/innotech/dployr.svg?branch=master)][travis] [![Dependency Status](https://gemnasium.com/innotech/dployr.svg)][gemnasium] [![Gem](https://badge.fury.io/rb/dployr.svg)][gem]
 
-> **Beta project, use it by your own risk**
-
 **Dployr** is a Ruby utility that **simplifies cloud management
 and deployment** across different providers
 
@@ -13,6 +11,8 @@ which covers the complete project deployment workflow,
 such as instances creation, network configuration, provisioning, testing and halting
 
 It provides a featured [command-line interface](#command-line-interface) and [programmatic API](#programmatic-api)
+
+**Note about project stage**: Dployr was tested and used in production projects since its born, however it's still under `beta` stage and major changes could be done in future versions. It's recommended to use it in non-hostile projects
 
 ## Installation
 
