@@ -12,7 +12,7 @@ such as instances creation, network configuration, provisioning, testing and hal
 
 It provides a featured [command-line interface](#command-line-interface) and [programmatic API](#programmatic-api)
 
-**Note about project stage**: Dployr was tested and used in production projects since its born, however it's still under `beta` stage and major changes could be done in future versions. It's recommended to use it in non-hostile projects
+**Note about project stage**: Dployr was tested and used in production projects since its born, however it's still under `beta` stage and major changes could be done in future minor versions which retrocompability will not be a premise. It's recommended to use it in non-hostile projects
 
 ## Installation
 
