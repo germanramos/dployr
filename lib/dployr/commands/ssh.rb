@@ -1,17 +1,18 @@
+require 'logger'
 require 'dployr/commands/base'
 require 'dployr/compute/aws'
 
 module Dployr
   module Commands
-    class Execute < Base
+    class Ssh < Base
 
-      def initialize(options, stages)
+      def initialize(options)
         super options
 
         puts "Connecting to #{@provider}...".yellow
         @client = Dployr::Compute.const_get(@provider.to_sym).new @options, @p_attrs
 
-        puts "Looking for #{@name} in #{@region}...".yellow
+        puts "Looking for #{@p_attrs["name"]} in #{@options[:region]}...".yellow
         @ip = @client.get_ip
         if @ip
           puts "#{@p_attrs["name"]} found with IP #{@ip}".yellow
@@ -19,9 +20,7 @@ module Dployr
           raise "#{@p_attrs["name"]} not found"
         end
 
-        stages.each do |stage|
-          Dployr::Scripts::Hook.new @ip, @config, stage
-        end
+        Dployr::Scripts::Ssh.new @ip, @config
       end
 
     end

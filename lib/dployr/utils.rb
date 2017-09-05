@@ -13,7 +13,7 @@ module Dployr
     end
 
     def get_by_key(hash, key)
-      if hash.is_a? Hash
+      if hash.is_a? Hash and key
         hash[key] or hash[key.to_sym] or hash[key.to_s]
       end
     end
@@ -44,27 +44,6 @@ module Dployr
 
     def deep_copy(o)
       Marshal.load Marshal.dump o
-    end
-
-    def parse_matrix(str)
-      hash = {}
-      str.split(';').each do |val|
-        val = val.split '='
-        hash[val.first.strip] = val.last.strip
-      end if str.is_a? String
-      hash
-    end
-
-    def parse_flags(str)
-      hash = {}
-      str.gsub(/\s+/, ' ').strip.split(' ').each_slice(2) do |val|
-        key = val.first
-        if val.first.is_a? String
-          key = key.gsub(/^\-+/, '').strip
-          hash[key] = (val.last or '').strip
-        end
-      end if str.is_a? String
-      hash
     end
 
     def replace_vars(str)

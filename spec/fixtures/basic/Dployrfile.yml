@@ -1,21 +1,21 @@
-german-dployr:
+default:
   attributes:
-    name: "german-dployr"
+    index: 1
+
+dployr:
+  attributes:
+    name: dployr-test
     prefix: dev
     private_key_path: ~/pems/innotechdev.pem
     username: innotechdev
   scripts:
     pre-provision:
-      -
-        source: ./hello
+      - source: ./hello
         target: /tmp
     provision:
-      -
+      - remote_path: /tmp/hello/jetty.sh
         args: ""
-        remote_path: "/tmp/hello/hello.sh"
-      -
-        args: ""
-        local_path: "ls -l /tmp/"    
+      - remote_path: "/tmp/test.sh %{index}"
   providers:
     aws:
       attributes:
@@ -28,3 +28,14 @@ german-dployr:
             security_groups:
               - sg-3cf3e45e # lib_aws_saopaulo
             subnet_id: subnet-1eebe07c
+          scripts:
+            stop:
+              - remote_path: "/tmp/stop.sh %{index}"
+    gce:
+      attributes:
+        instance_type: f1-micro
+      regions:
+        europe-west1-a:
+          attributes:
+            image_name: centos-base-v7 # centos-base-v7
+            network: liberty-gce

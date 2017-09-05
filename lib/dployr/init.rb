@@ -34,8 +34,7 @@ module Dployr
 
     def initialize(attributes = {})
       @@instance = self
-      @attributes = attributes
-      @config = Dployr::Configuration.new
+      @config = Dployr::Configuration.new attributes
       @file_path = nil
     end
 
@@ -44,11 +43,12 @@ module Dployr
     end
 
     def load_config(file_path = nil)
-      if file_path
-        @file_path = file_path
-      else
-        @file_path = discover
-      end
+      @file_path =
+        if file_path
+          file_path
+        else
+          discover
+        end
       set_config @file_path
     end
 
@@ -68,7 +68,7 @@ module Dployr
       config = read_yaml file_path
       if config.is_a? Hash
         config.each do |name, config|
-          if name == 'default'
+          if name.to_s == 'default'
             @config.set_default config
           else
             @config.add_instance name, config

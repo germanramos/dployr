@@ -4,8 +4,8 @@ require 'dployr/version'
 Gem::Specification.new do |s|
   s.name        = "dployr"
   s.version     = Dployr::VERSION
-  s.summary     = "Multicloud management and deployment with asteroids made simple"
-  s.description = "Multicloud management and deployment with asteroids made simple with a rich programmatic API and featured CLI"
+  s.summary     = "Multicloud management and deployment made simple"
+  s.description = "Multicloud management and deployment made simple from a single configuration file with a featured CLI and programmatic API, supporting deployment stages, local scripts and remote scripts execution and more"
   s.authors     = ["Tomas Aparicio", "German Ramos"]
   s.email       = ["nerds@innotechapp.com"]
   s.homepage    = "https://github.com/innotech/dployr"
@@ -19,9 +19,9 @@ Gem::Specification.new do |s|
   s.rdoc_options     = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w[README.md]
 
-  s.add_dependency "fog", "~> 1.21"
+  s.add_dependency "fog", "~> 1.25"
   s.add_dependency "deep_merge", "~> 1.0"
-  s.add_dependency "net-ssh", "~> 2.8.0"
+  s.add_dependency "net-ssh", "~> 2.9.0"
   s.add_dependency "net-scp", "~> 1.2.0"
   s.add_dependency "colorize", "~> 0.7.2"
 

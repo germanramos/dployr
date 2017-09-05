@@ -1,0 +1,43 @@
+german-template:
+  attributes:
+    name: "german-dployr"
+    prefix: dev
+    private_key_path: ~/pems/innotechdev.pem
+    username: innotechdev
+  scripts:
+    pre-provision:
+      - source: ./hello
+        target: /tmp
+    provision:
+      - remote_path: /tmp/hello/hello.sh
+  providers:
+    baremetal:
+      regions:
+        wizzo:
+          attributes:
+            private_ip: 10.111.6.56
+    aws:
+      attributes:
+        instance_type: t1.micro
+      scripts:
+        post-halt:
+        - local_path: sleep
+          args: "50"
+      regions:
+        sa-east-1a:
+          attributes:
+            ami: ami-370daf2a # centos-base-v7
+            keypair: vagrant-aws-saopaulo
+            security_groups:
+              - sg-3cf3e45e # lib_aws_saopaulo
+            subnet_id: subnet-1eebe07c
+            #public_ip: new
+    gce:
+      attributes:
+        instance_type: f1-micro
+      regions:
+        europe-west1-a:
+          attributes:
+            image_name: centos-base-v7 # centos-base-v7
+            network: liberty-gce
+            #public_ip: 146.148.27.56

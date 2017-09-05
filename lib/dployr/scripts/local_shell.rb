@@ -1,24 +1,12 @@
-require 'logger'
 require 'net/ssh'
-require 'colorize'
-require 'dployr/utils'
 
 module Dployr
   module Scripts
     class Local_Shell
 
-      include Dployr::Utils
-
       def initialize(script)
-        @log = Logger.new STDOUT
         @script = script
-
-        begin
-          start
-        rescue Exception => e
-          @log.error e
-          Process.exit! false
-        end
+        start
       end
 
       private
@@ -26,11 +14,15 @@ module Dployr
       def start
         command = @script["local_path"]
         arguments = @script["args"]
+        arguments = arguments.join ' ' if arguments.is_a? Array
 
         puts "Running local script '#{command} #{arguments}'".yellow
-        result = system(command + ' ' + arguments)
+        total_command = command
+        total_command =  command + ' ' + arguments if arguments
+
+        result = system total_command
         if result == false
-          raise "Exit code non zero when running local script '#{command} #{arguments}'".yellow
+          raise "Exit code non zero when running local script '#{total_command}'"
         else
           puts "Local script '#{command} #{arguments}' finished succesfully".yellow
         end
